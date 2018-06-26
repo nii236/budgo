@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"time"
 
 	_ "github.com/lib/pq"
 
@@ -31,6 +32,7 @@ type Record struct {
 	Description string
 	Category    string
 	Cents       int
+	CreatedAt   time.Time `db:"created_at"`
 }
 
 func (c *conn) saveRecord(name, category string, cents int) error {
@@ -43,7 +45,7 @@ func (c *conn) saveRecord(name, category string, cents int) error {
 
 func (c *conn) records() ([]*Record, error) {
 	result := []*Record{}
-	err := c.Select(&result, "SELECT description, category, cents FROM records ORDER BY created_at")
+	err := c.Select(&result, "SELECT description, category, cents, created_at FROM records ORDER BY created_at")
 	if err != nil {
 		return nil, err
 	}

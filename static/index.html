@@ -6,15 +6,16 @@
 
 <body class="bg-navy white">
     <p class="f-headline tc mb1">Budgo</p>
-    <p class="f3 tc">Because you're worth it.</p>
+    <p class="f3 tc">Because you're worth more.</p>
     <p class="f1 tc">Total: ${{ .Total }}</p>
     <div class="mw9 center">
         <div class="w-50-l w-100 pa4 fl">
             <h1 class="f1 tc">In (dollars)</h1>
             <form method="POST" action="/in">
-                <input placeholder="description" name="description" id="in" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text">
-                <input placeholder="category" name="category" id="in" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text">
-                <input placeholder="amount" name="amount" id="in" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text">
+                <input required placeholder="description" name="description" id="in" class="input-reset ba b--black-20 pa2 mb2 db w-100"
+                    type="text">
+                <input required placeholder="category" name="category" id="in" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text">
+                <input required placeholder="amount" name="amount" id="in" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text">
                 <small id="in-desc" class="f6 db mb2">Let the money flow in.</small>
                 <button class="link dim ba ph3 pv2 mb2 white dib bg-transparent">Save</button>
             </form>
@@ -22,9 +23,10 @@
         <div class="w-50-l w-100 pa4 fl">
             <h1 class="f1 tc">Out (dollars)</h1>
             <form method="POST" action="/out">
-                <input placeholder="description" name="description" id="in" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text">
-                <input placeholder="category" name="category" id="in" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text">
-                <input placeholder="amount" name="amount" id="in" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text">
+                <input required placeholder="description" name="description" id="in" class="input-reset ba b--black-20 pa2 mb2 db w-100"
+                    type="text">
+                <input required placeholder="category" name="category" id="in" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text">
+                <input required placeholder="amount" name="amount" id="in" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text">
                 <small id="out-desc" class="f6 db mb2">The money is escaping!</small>
                 <button class="link dim ba ph3 pv2 mb2 white dib bg-transparent">Save</button>
             </form>
@@ -36,16 +38,16 @@
             <table class="f6 w-100 mw8 center" cellspacing="0">
                 <thead>
                     <tr class="stripe-dark">
+                        <th class="fw6 tl pa3 bg-transparent">Timestamp</th>
                         <th class="fw6 tl pa3 bg-transparent">Description</th>
-                        <th class="fw6 tl pa3 bg-transparent">Category</th>
                         <th class="fw6 tl pa3 bg-transparent">Amount (dollars)</th>
                     </tr>
                 </thead>
                 <tbody class="lh-copy">
                     {{ range .Records }}
                     <tr class="stripe-dark">
+                        <td class="pa3">{{.CreatedAt.Format "02 Jan 2006"}}</td>
                         <td class="pa3">{{.Description}}</td>
-                        <td class="pa3">{{.Category}}</td>
                         <td class="pa3">{{divide .Cents 100}}</td>
                     </tr>
                     {{ end }}
